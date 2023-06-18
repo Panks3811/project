@@ -2,11 +2,13 @@
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var filter = document.getElementById('filter');
-
+var descriptionNode = document.getElementById('description');
 // Form submit event
 form.addEventListener('submit', addItem);
+description.addEventListener('submit',addItem);
 // Delete event
 itemList.addEventListener('click', removeItem);
+
 // Filter event
 filter.addEventListener('keyup', filterItems);
 
@@ -16,13 +18,14 @@ function addItem(e){
 
   // Get input value
   var newItem = document.getElementById('item').value;
-
+  var descriptionNode = document.getElementById('description').value;
   // Create new li element
   var li = document.createElement('li');
   // Add class
   li.className = 'list-group-item';
   // Add text node with input value
   li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(descriptionNode));
 
   // Create del button element
   var deleteBtn = document.createElement('button');
@@ -38,6 +41,7 @@ function addItem(e){
 
   // Append li to list
   itemList.appendChild(li);
+  descriptionNode.appendChild(li);
 }
 
 // Remove item
@@ -56,10 +60,14 @@ function filterItems(e){
   var text = e.target.value.toLowerCase();
   // Get lis
   var items = itemList.getElementsByTagName('li');
+  
   // Convert to an array
   Array.from(items).forEach(function(item){
+
     var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1){
+    var description = item.lastChild.textContent; 
+
+    if(itemName.toLowerCase().indexOf(text) != -1 || description.toLowerCase().indexOf(text) != -1 ){
       item.style.display = 'block';
     } else {
       item.style.display = 'none';
