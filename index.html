@@ -18,7 +18,16 @@
             localStorage.setItem('name' , name);
             localStorage.setItem('emailId', email);
             localStorage.setItem('phonenumber', phonenumber);
+    
+            const obj = {
+                name : name,
+                email : email,
+                phonenumber: phonenumber
+            }
+            localStorage.setItem('userDetails', JSON.stringify(obj));
         }
     </script>
   </body>
 </html>
+
+     
